@@ -1,5 +1,8 @@
 import { BigQuery } from "@google-cloud/bigquery";
 import { Tool } from "langchain/tools";
+import * as path from 'path';
+
+const filePath = path.resolve(__dirname, '../../../../../everipedia.json');
 
 export class BigQueryTool extends Tool {
     name = "BigQuery";
@@ -8,7 +11,7 @@ export class BigQueryTool extends Tool {
     async run(input: string) {
         const bigquery = new BigQuery({
             projectId: "nebula-306510",
-            keyFilename: "/Users/cesar/projects/ai-editor/everipedia.json",
+            keyFilename: filePath,
         });
         try {
             const options = {
