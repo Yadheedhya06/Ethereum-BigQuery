@@ -38,11 +38,17 @@ async function main() {
 
 
     const result = await executor.call({
-        input:
-            "list of top 10 ethereum addresses ordered by balance. convert to simple list",
+        input: "number of ethereum addresses with more than 1 eth, convert to simple list",
+
     });
 
     console.log(`🗿 Output: ${result.output}`);
 }
 
 main();
+
+
+// "list the token transfers from 0xcd65cd5911ebf35c9cc2897358dae30a378d851e Ethereum address, convert to simple list",
+// "list of top 10 ethereum addresses ordered by balance. convert to simple list",
+//  "list of unique smart contract bytecodes, convert to simple list",
+// "number of ethereum addresses with more than 1 eth",
