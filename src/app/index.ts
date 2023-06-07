@@ -6,6 +6,9 @@ import {
     RequestsGetTool,
 } from "langchain/tools";
 import { BigQueryTool } from "./tools/BigQueryTool";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const model = new OpenAI({
     temperature: 0,
@@ -32,6 +35,7 @@ async function main() {
         verbose: true,
         maxIterations: 10, // Only fixed iterations are allowed so agent don't go crazy
     });
+
 
     const result = await executor.call({
         input:
