@@ -5,6 +5,7 @@ import {
     JsonGetValueTool,
     RequestsGetTool,
 } from "langchain/tools";
+import { buildSqlQuery } from "./tools/buildSQL";
 import { BigQueryTool } from "./tools/BigQueryTool";
 import dotenv from 'dotenv';
 
@@ -30,15 +31,20 @@ async function main() {
         new BigQueryTool(),
     ];
 
+
     const executor = await initializeAgentExecutorWithOptions(tools, model, {
         agentType: "zero-shot-react-description",
         verbose: true,
         maxIterations: 10, // Only fixed iterations are allowed so agent don't go crazy
     });
 
+    const inputArgument = "list of top 10 ethereum addresses ordered by balance";
+    const sqlQuery = await buildSqlQuery(inputArgument).catch((error) => {
+        console.error("Error building SQL query:", error);
+    });
 
     const result = await executor.call({
-        input: "number of ethereum addresses with more than 1 eth balance",
+        input: sqlQuery,
 
     });
 
