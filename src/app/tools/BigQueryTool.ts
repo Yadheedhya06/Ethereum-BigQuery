@@ -19,7 +19,7 @@ export class BigQueryTool extends Tool {
                 query: input,
                 location: "US",
             };
-            const [rows] = await bigquery.query(options);
+            const rows = await bigquery.query(options);
             return rows;
         } catch (error) {
             console.error("Error running query:", error);

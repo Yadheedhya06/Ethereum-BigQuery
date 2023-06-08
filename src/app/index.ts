@@ -38,7 +38,7 @@ async function main() {
 
 
     const result = await executor.call({
-        input: "number of ethereum addresses with more than 1 eth, convert to simple list",
+        input: "number of ethereum addresses with more than 1 eth balance",
 
     });
 
