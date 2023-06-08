@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node test.ts"
+    "start": "ts-node src/app/index.ts"
   },
   "dependencies": {
     "@google-cloud/bigquery": "^6.2.0",
