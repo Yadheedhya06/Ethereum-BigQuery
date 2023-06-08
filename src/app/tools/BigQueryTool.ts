@@ -2,7 +2,7 @@ import { BigQuery } from "@google-cloud/bigquery";
 import { Tool } from "langchain/tools";
 import * as path from 'path';
 
-const filePath = path.resolve(__dirname, '../../../../../everipedia.json');
+const filePath = path.resolve(__dirname, '../../../../../../everipedia.json');
 
 export class BigQueryTool extends Tool {
     name = "BigQuery";
