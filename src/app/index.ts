@@ -42,10 +42,10 @@ async function main() {
     const sqlQuery = await buildSqlQuery(inputArgument).catch((error) => {
         console.error("Error building SQL query:", error);
     });
+    console.log(sqlQuery)
 
     const result = await executor.call({
         input: sqlQuery,
-
     });
 
     console.log(`🗿 Output: ${result.output}`);
