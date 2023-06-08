@@ -10,7 +10,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-async function main() {
+export async function buildSqlQuery(input: string): Promise<string> {
     const model = new OpenAI({
         temperature: 0,
         openAIApiKey: process.env.OPENAI_API_KEY || '',
@@ -27,12 +27,10 @@ async function main() {
 
 
     const chain = new LLMChain({ prompt: chatPrompt, llm: model });
-    const response = await chain.call({ text: "number of ethereum addresses with more than 1 eth" });
+    const response = await chain.call({ text: input });
 
     const sqlQuery = response.text.trim();
     console.log(sqlQuery);
 
+    return sqlQuery;
 }
-
-
-main();
