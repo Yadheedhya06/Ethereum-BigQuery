@@ -7,6 +7,7 @@ import {
 } from "langchain/prompts";
 import { LLMChain } from "langchain/chains";
 import dotenv from 'dotenv';
+import { stringify } from "querystring";
 
 dotenv.config();
 

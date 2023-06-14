@@ -25,20 +25,20 @@ export class BigQueryTool extends Tool {
         }
     }
 
-    async _call(input: string) {
-        const rows = await this.run(input);
-        return JSON.stringify(rows);
-    }
-
     // async _call(input: string) {
-    //     // substring to remove the first 3 letters and last 3 letters
-    //     const query = input
-    //         .substring(3, input.length - 3)
-    //         .replace("\n", " ")
-    //         .trim(); // removing ```
-    //     const rows = await this.run(query);
+    //     const rows = await this.run(input);
     //     return JSON.stringify(rows);
     // }
+
+    async _call(input: string) {
+        // substring to remove the first 3 letters and last 3 letters
+        const query = input
+            .substring(3, input.length - 3)
+            .replace("\n", " ")
+            .trim(); // removing ```
+        const rows = await this.run(query);
+        return JSON.stringify(rows);
+    }
 }
 
 

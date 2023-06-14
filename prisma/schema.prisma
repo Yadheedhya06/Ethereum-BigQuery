@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Request {
+  id           Int      @id(map: "requests_pkey") @default(autoincrement())
+  createdAt    DateTime @default(now())
+  query        String
+  debugOptions Json
+  language     String
+  answer       String
+  pages        Page[]
+}
+
+model Source {
+  id        Int      @id(map: "sources_pkey") @default(autoincrement())
+  type      String   @db.VarChar
+  name      String   @db.VarChar
+  createdAt DateTime @default(now())
+  indexedAt DateTime
+  url       String   @db.VarChar
+  Page      Page[]
+}
+
+model Page {
+  id         Int          @id(map: "pages_pkey") @default(autoincrement())
+  sourceId   Int
+  url        String       @unique @db.VarChar
+  title      String       @db.VarChar
+  content    String
+  Embeddings Embeddings[]
+  source     Source       @relation(fields: [sourceId], references: [id])
+  Request    Request[]
+}
+
+model Embeddings {
+  id        Int                    @id(map: "embeddings_pkey") @default(autoincrement())
+  pageId    Int
+  strategy  String?                @db.VarChar
+  chunk     String
+  embedding Unsupported("vector")?
+  page      Page                   @relation(fields: [pageId], references: [id])
+
+  @@index([strategy], map: "embeddings_strategy_idx")
+}
+
+model Documentations {
+  id        Int                    @id(map: "documentations_pkey") @default(autoincrement())
+  name      String                 @db.VarChar
+  content   String
+  embedding Unsupported("vector")?
+}

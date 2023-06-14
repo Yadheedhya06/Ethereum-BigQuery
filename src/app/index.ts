@@ -5,11 +5,17 @@ import {
     JsonGetValueTool,
     RequestsGetTool,
 } from "langchain/tools";
+import { BigQuery } from "@google-cloud/bigquery";
 import { buildSqlQuery } from "./tools/buildSQL";
 import { BigQueryTool } from "./tools/BigQueryTool";
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+import * as path from 'path';
+
+const filePath = path.resolve(__dirname, '../../../../../everipedia.json');
+
 
 const model = new OpenAI({
     temperature: 0,
@@ -35,7 +41,7 @@ async function main() {
     const executor = await initializeAgentExecutorWithOptions(tools, model, {
         agentType: "zero-shot-react-description",
         verbose: true,
-        maxIterations: 10, // Only fixed iterations are allowed so agent don't go crazy
+        maxIterations: 2, // Only fixed iterations are allowed so agent don't go crazy
     });
 
     const inputArgument = "list of top 10 ethereum addresses ordered by balance";
@@ -44,11 +50,26 @@ async function main() {
     });
     console.log(sqlQuery)
 
-    const result = await executor.call({
-        input: sqlQuery,
+    const bigquery = new BigQuery({
+        projectId: "nebula-306510",
+        keyFilename: filePath,
     });
+    try {
+        const options = {
+            query: input,
+            location: "US",
+        };
+        const rows = await bigquery.query(options);
+        // return rows;
+    } catch (error) {
+        console.error("Error running query:", error);
+    }
+}
+// const result = await executor.call({
+//     input: sqlQuery,
+// });
 
-    console.log(`🗿 Output: ${result.output}`);
+console.log(`🗿 Output: ${rows}`);
 }
 
 main();
