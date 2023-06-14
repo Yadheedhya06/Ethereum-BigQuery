@@ -25,8 +25,6 @@ export async function buildSqlQuery(input: string): Promise<string> {
         HumanMessagePromptTemplate.fromTemplate("{text}"),
     ]);
 
-
-
     const chain = new LLMChain({ prompt: chatPrompt, llm: model });
     const response = await chain.call({ text: input });
 

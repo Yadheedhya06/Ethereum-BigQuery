@@ -56,7 +56,7 @@ async function main() {
     });
     try {
         const options = {
-            query: input,
+            query: sqlQuery,
             location: "US",
         };
         const rows = await bigquery.query(options);
@@ -64,12 +64,12 @@ async function main() {
     } catch (error) {
         console.error("Error running query:", error);
     }
-}
-// const result = await executor.call({
-//     input: sqlQuery,
-// });
 
-console.log(`🗿 Output: ${rows}`);
+    // const result = await executor.call({
+    //     input: sqlQuery,
+    // });
+
+    console.log(`🗿 Output: ${rows}`);
 }
 
 main();
