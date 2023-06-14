@@ -15,10 +15,9 @@ const main = async () => {
 
         for (const doc of docs) {
             const embedding = await embeddings.embedQuery(doc.pageContent);
-            console.log(embedding)
             const query =
                 'INSERT INTO "Documentations" (name, content, embedding) VALUES ($1, $2, $3)'
-            const values = ["Blockchair", doc, embedding]
+            const values = ["Blockchair", doc.pageContent, embedding]
             await prisma.$executeRawUnsafe(query, ...values)
         }
 
