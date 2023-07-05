@@ -41,7 +41,7 @@ async function main() {
     const executor = await initializeAgentExecutorWithOptions(tools, model, {
         agentType: "zero-shot-react-description",
         verbose: true,
-        maxIterations: 2, // Only fixed iterations are allowed so agent don't go crazy
+        maxIterations: 2, 
     });
 
     const inputArgument = "list of top 10 ethereum addresses ordered by balance";
