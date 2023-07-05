@@ -33,7 +33,7 @@ async function main() {
         /* await AIPluginTool.fromPluginUrl(
           "https://plugin-ai.vercel.app/.well-known/ai-plugin.json"
         ),
-        new CustomRequestGetTool(), */
+        new CustomRequestGetTool(), gwrwr*/
         new BigQueryTool(),
     ];
 
