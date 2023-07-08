@@ -20,7 +20,7 @@ const main = async () => {
             const values = ["Blockchair", doc.pageContent, embedding]
             await prisma.$executeRawUnsafe(query, ...values)
         }
-// ioqeiohqpe 
+
         console.log('embeddings generated and Documents table Updated');
     } catch (e) {
         console.log('Error while splitting document contents and generating embeddings:', e);
